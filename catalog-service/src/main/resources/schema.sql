@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS products (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR(500),
+  image_url VARCHAR(500),
+  price_cents BIGINT NOT NULL,
+  available_stock INT NOT NULL,
+  enabled TINYINT(1) NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CHECK (available_stock >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS pickup_points (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  address VARCHAR(200) NOT NULL,
+  enabled TINYINT(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS stock_reservations (
+  order_no VARCHAR(36) NOT NULL PRIMARY KEY,
+  product_id BIGINT NOT NULL,
+  quantity INT NOT NULL,
+  status VARCHAR(10) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT IGNORE INTO pickup_points(id,name,address) VALUES (1,'社区服务中心','幸福路 18 号一层'),(2,'东门便利店','建设街 6 号东门旁');

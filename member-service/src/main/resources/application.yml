@@ -1,0 +1,21 @@
+server:
+  address: 127.0.0.1
+  port: 8081
+spring:
+  application:
+    name: member-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/groupbuy_member?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+  sql:
+    init:
+      mode: always
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        ip: 127.0.0.1
+app:
+  jwt-secret: ${APP_JWT_SECRET:local-study-secret-change-before-sharing}
+  admin-password: ${APP_ADMIN_PASSWORD:Admin@123456}

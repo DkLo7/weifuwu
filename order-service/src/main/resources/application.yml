@@ -1,0 +1,31 @@
+server:
+  address: 127.0.0.1
+  port: 8083
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/groupbuy_order?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+  sql:
+    init:
+      mode: always
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        ip: 127.0.0.1
+    sentinel:
+      eager: true
+      transport:
+        dashboard: 127.0.0.1:8858
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 3000
+app:
+  jwt-secret: ${APP_JWT_SECRET:local-study-secret-change-before-sharing}
+  internal-key: ${APP_INTERNAL_KEY:local-study-internal-key}
